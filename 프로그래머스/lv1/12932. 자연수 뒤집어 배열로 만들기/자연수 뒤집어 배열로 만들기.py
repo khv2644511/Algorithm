@@ -3,17 +3,8 @@ def solution(n):
     n = str(n)
     for i in n:
         answer.append(int(i))
-    answer.reverse()
+    answer = list(reversed(answer))
     return answer
 
 
 
-n = 12345
-n = str(n)
-answer = []
-
-for i in n:
-    answer.append(int(i))
-    
-a = list(reversed(answer))
-print(a)
