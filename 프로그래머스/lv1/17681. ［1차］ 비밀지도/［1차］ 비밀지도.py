@@ -1,27 +1,19 @@
+import re
 def solution (n, arr1, arr2):
-    arr1_bin = []
-    arr2_bin = []
-    for i in arr1:
-        a = format(i, 'b').rjust(n, '0')
-        arr1_bin.append(a)
+    answer =[]
+    tran_answer =[]
+    li = list(zip(arr1, arr2))
+
+    for i,j in li:
+        answer.append(i|j)
     
-    for i in arr2:
-        a = format(i, 'b').rjust(n, '0')
-        a.ljust(len(a), '0')
-        arr2_bin.append(a)
-        
-    solve = []
-    path = ''
-    for i in range(n):
-        path = ''
-        for j in range(n):
-            if int(arr1_bin[i][j] + arr2_bin[i][j]) == 0:
-                # print(' ')
-                path += ' '
-            else:
-                path += '#'
-                # print('#')
-        solve.append(path)
-        answer = solve
-        continue
+    for k in answer:
+        bit= format(k,'b').rjust(n,'0')
+        tran_answer.append(bit)
+    answer =[]
+
+    for t in tran_answer:
+        a = re.sub('1','#',t)
+        d = re.sub('0',' ',a)
+        answer.append(d)      
     return answer
