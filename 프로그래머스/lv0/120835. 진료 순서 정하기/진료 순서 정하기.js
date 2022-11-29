@@ -1,7 +1,6 @@
 function solution(emergency) {
     var answer = [];
-    let sorted = [...emergency]
-    sorted.sort((a,b) => b-a)
+    let sorted = [...emergency].sort((a,b) => b-a)
     answer= emergency.map((v) => sorted.indexOf(v)+1)
     return answer;
 }
