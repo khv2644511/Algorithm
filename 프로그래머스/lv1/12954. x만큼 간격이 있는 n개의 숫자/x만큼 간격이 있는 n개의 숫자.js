@@ -1,9 +1,6 @@
 function solution(x, n) {
-  var answer = [];
-  let sum = 0;
-  for (let i = 0; i < n; i++) {
-    sum += x;
-    answer.push(sum);
-  }
-  return answer;
+  console.log(Array(n).fill(x));
+  return Array(n)
+    .fill(x)
+    .map((v, i) => (i + 1) * v);
 }
