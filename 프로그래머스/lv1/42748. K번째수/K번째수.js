@@ -4,8 +4,8 @@ function solution(array, commands) {
         let [i, j, k ] = command
         let slicedArray = array.slice(i-1, j)
         let sortedArray = slicedArray.sort((a,b) => a - b)
-        let target = sortedArray.slice(k-1 , k)
-        answer.push(...target)
+         let kthValue = sortedArray[k - 1]; // k번째 값
+        answer.push(kthValue)
         
     }
     return answer;
