@@ -1,24 +1,13 @@
 const fs = require('fs');
 const input = fs.readFileSync('dev/stdin').toString().trim().split(' ');
 
-let [n, k] = input;
-let queue = [];
-let result = [];
-
-for (let i = 1; i <= n; i++) {
-    queue.push(i);
+let ans = [];
+const [N, K] = input;
+const arr = Array.from({ length: N }, (_, index) => index + 1);
+let count = K - 1;
+while (arr.length !== 0) {
+  ans.push(...arr.splice(count, 1));
+  count += K - 1;
+  if (count >= arr.length) count %= arr.length;
 }
-
-let count = 1;
-while (queue.length) {
-    const shiftItem = queue.shift(); // 1
-    if (count % k === 0) {
-        result.push(shiftItem);
-    } else {
-        queue.push(shiftItem);
-    }
-    count += 1;
-}
-
-console.log(`<${result.join(', ')}>`);
-
+console.log(`<${ans.join(', ')}>`);
