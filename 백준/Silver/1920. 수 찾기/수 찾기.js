@@ -10,6 +10,7 @@ let arrA = input[1]
     .sort((a, b) => a - b);
 
 let arrM = input[3].split(' ').map(Number);
+let answer = [];
 
 function binary_search(arr, key, low, high) {
     if (low <= high) {
@@ -30,8 +31,12 @@ function binary_search(arr, key, low, high) {
 }
 
 
-const answer = arrM.map((v) => {
-    return binary_search(arrA, v, 0, N);
-});
+for (let i = 0; i < M; i++) {
+    let key = arrM[i];
+
+    let low = 0;
+    let high = N;
+    answer.push(binary_search(arrA, key, low, high));
+}
 
 console.log(answer.join('\n'));
