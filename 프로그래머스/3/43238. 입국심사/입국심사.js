@@ -1,24 +1,24 @@
 function solution(n, times) {
-    times.sort((a,b) => a-b); 
-    let left = 1;
-    let right = n * times[times.length -1];
-    let answer = right; // 최대값.
-    while(left <= right){
-        let mid = Math.floor((left + right) / 2);
-        let count = 0
-        times.forEach(value => {
-            count += Math.floor(mid / value); // 한 사람당 몇명 할 수 있는지
-            if(count >= n) {
-                answer = Math.min(mid, answer); // 최솟값
-                return;
-            };
-        });
-        if (count >= n) { 
-            right = mid - 1;
+    let low = 1; // MaxH가 가질 수 있는 최솟값
+    let high = Math.max(...times) * n; // time 가질 수 있는 최댓값
+    times.sort((a, b) => a - b);
+
+    let answer = 0;
+    while (low <= high) {
+        let middle = ~~((low + high) / 2);
+        let people = 0;
+        for (let time of times) {
+            people += ~~(middle / time);
+            if (people >= n) break;
         }
-        else {
-            left = mid + 1;
+
+        if (people >= n) {
+            high = middle - 1;
+            answer = middle;
+        } else {
+            low = middle + 1;
         }
     }
     return answer;
 }
+// console.log(solution(6, [7, 10]));
