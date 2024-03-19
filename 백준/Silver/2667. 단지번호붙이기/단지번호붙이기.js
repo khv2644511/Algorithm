@@ -1,64 +1,52 @@
 let fs = require('fs');
 let input = fs.readFileSync('/dev/stdin').toString().split('\n');
 
-const n = +input.shift();
+let N = input.shift();
 
-input = input.map((arr) =>
-    arr
-        .trim()
-        .split('')
-        .map((x) => +x)
-);
+let graph = input.map((el) => {
+    return el.split('').map(Number);
+});
 
-const visited = [];
-for (let i = 0; i < n; i++) {
-    visited.push(new Array(n).fill(0));
-}
+let visited = Array.from({ length: N }, () => Array.from({ length: N }, () => 0));
+let answer = [];
 
-const nX = [0, 0, 1, -1]; // 좌
-const nY = [1, -1, 0, 0]; // 상하우좌
-
-let complexes = [];
-let houses = 0;
-
-const rangeCheck = (x, y) => {
-    if (x < 0 || x >= n || y < 0 || y >= n) return false;
+function RangeCheck(x, y) {
+    if (x < 0 || x >= N || y < 0 || y >= N) return false;
     return true;
-};
+}
+function BFS(i, j) {
+    let queue = [];
+    queue.push([i, j]);
+    visited[i][j] = 1;
+    // count++;
+    let count = 1;
 
-const BFS = (curX, curY) => {
-    const queue = [];
-    queue.push([curX, curY]);
-    houses = 0;
+    let Xn = [0, 0, -1, 1];
+    let Yn = [1, -1, 0, 0];
 
     while (queue.length) {
-        const target = queue.shift();
-        curX = target[0];
-        curY = target[1];
+        let target = queue.shift();
 
-        if (visited[curX][curY] === 0) {
-            visited[curX][curY] = 1;
-            houses++;
+        let CurX = target[0];
+        let CurY = target[1];
 
-            for (let i = 0; i < 4; i++) {
-                if (rangeCheck(curX + nX[i], curY + nY[i]) && input[curX + nX[i]][curY + nY[i]] === 1) {
-                    queue.push([curX + nX[i], curY + nY[i]]);
-                }
+        for (let i = 0; i < 4; i++) {
+            if (RangeCheck(CurX + Xn[i], CurY + Yn[i]) && graph[CurX + Xn[i]][CurY + Yn[i]] == 1 && !visited[CurX + Xn[i]][CurY + Yn[i]]) {
+                visited[CurX + Xn[i]][CurY + Yn[i]] = 1;
+                queue.push([CurX + Xn[i], CurY + Yn[i]]);
+                count++;
             }
         }
     }
-    complexes.push(houses);
-};
+    answer.push(count);
+}
 
-for (let i = 0; i < n; i++) {
-    for (let j = 0; j < n; j++) {
-        if (+visited[i][j] === 0 && +input[i][j] === 1) {
-            // 집 위치가 1이고, 방문하지 않은 곳이면 BFS로 검사한다.
+for (let i = 0; i < N; i++) {
+    for (let j = 0; j < N; j++) {
+        if (!visited[i][j] && graph[i][j] == 1) {
             BFS(i, j);
         }
     }
 }
-
-complexes.sort((a, b) => a - b);
-let answer = [complexes.length, ...complexes];
-console.log(answer.join('\n'));
+console.log(answer.length);
+console.log(answer.sort((a, b) => a - b).join('\n'));
