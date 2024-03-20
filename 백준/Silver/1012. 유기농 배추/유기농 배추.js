@@ -13,7 +13,7 @@ let idx = 0;
 for (let i = 0; i < testCase; i++) {
     answer = []; // answer 초기화
     [M, N, K] = input[idx].split(' ').map(Number);
-    // N x M  (8 x 10)배열 만들기
+    // 가로 M=10, 세로 N=8 (10 x 8)배열 만들기
     graph = Array.from(Array(N), () => Array(M).fill(0));
     visited = Array.from(Array(N), () => Array(M).fill(0));
 
@@ -49,8 +49,8 @@ function BFS(i, j) {
     visited[i][j] = 1; // 방문처리
     count = 1;
 
-    let Xn = [0, 0, -1, 1];
-    let Yn = [-1, 1, 0, 0];
+    let Xn = [0, 1, 0, -1];
+    let Yn = [1, 0, -1, 0];
 
     while (queue.length) {
         let target = queue.shift();
