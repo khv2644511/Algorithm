@@ -3,32 +3,29 @@ let input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
 
 let testCase = parseInt(input.shift());
 
-let j = 0;
 let graph = [];
 let visited = [];
 let count = 0;
 let M, N, K;
 let answer = [];
-
-let inputIndex = 0; // 입력을 읽기 시작할 인덱스를 관리합니다.
+let idx = 0;
 
 for (let i = 0; i < testCase; i++) {
     answer = []; // answer 초기화
-    [M, N, K] = input[inputIndex].split(' ').map(Number);
+    [M, N, K] = input[idx].split(' ').map(Number);
     // N x M  (8 x 10)배열 만들기
     graph = Array.from(Array(N), () => Array(M).fill(0));
     visited = Array.from(Array(N), () => Array(M).fill(0));
 
-    inputIndex++; // M, N, K를 읽은 다음부터 시작
     // console.log(M, N, K);
+    idx++;
 
     for (let j = 0; j < K; j++) {
         // console.log(input[j + 1]);
-        let [x, y] = input[inputIndex + j].split(' ').map(Number);
+        let [x, y] = input[idx + j].split(' ').map(Number);
         graph[y][x] = 1;
     }
-    inputIndex += K; // 다음 테스트 케이스의 위치로 인덱스를 업데이트
-
+    idx += K;
     // console.log('graph', graph);
 
     for (let k = 0; k < N; k++) {
