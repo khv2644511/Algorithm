@@ -1,46 +1,34 @@
-
 function solution(n, wires) {
-    let graph = Array.from({ length: (n + 1) }, (_, idx) => []);
-
+    var answer = -1;
+    // for (let i=0; i<n-1; i++) {
+    //     let [x,y] = 
+    // }
+    let graph = Array.from({length:n+1}, (_,idx) => [])
+    
     for (let wire of wires) {
         let [from, to] = wire;
-        graph[from].push(to);
-        graph[to].push(from);
+        graph[from].push(to)
+        graph[to].push(from)
     }
-    let minAnswer = Number.MAX_SAFE_INTEGER;
-    for (let wire of wires) {
-        let [a, b] = wire;
-        // 송전탑 개수의 차이가 작을수록 비슷하게 나눠 가진 것이므로 최솟값을 담아준다.
-        let result = Math.abs(BFS(a, b, graph,n) - BFS(b, a, graph));
-        if (result < minAnswer) minAnswer = result;
+    console.log(graph)
+    let maxLen = 0;
+    let idx= 0;
+    for (let i=0; i< n-1; i++) {
+        let len = graph[i].length // 길이 저장
+
+        if(maxLen <= len) {
+            maxLen = len   // 최대 길이 저장, 이때 해당 인덱스에서 자른다.
+            idx = i
+        }
     }
-
-    console.log('minAnswer', minAnswer);
-
-    return minAnswer;
-}
-
-function BFS(root, exception, graph,n) {
-    let visited = Array.from({ length: n + 1 }, () => false); // 방문 처리 초기화해주기
-
-    count = 0;
-    let queue = [];
-    queue.push(root);
-    visited[root] = true;
-
-    count++;
-
-    while (queue.length) {
-        let shiftItem = queue.shift();
-
-        graph[shiftItem].forEach((el) => {
-            if (!visited[el] && el !== exception) {
-                queue.push(el);
-                count++;
-
-                visited[el] = true;
-            }
-        });
-    }
-    return count;
+    // 그 다음에 자른 간선 기준으로 각각 몇개 노드를 가지는지 어떻게 알까??
+    // idx = 4면 4번째 노드랑 연결된 [3,5,6,7]이 있는데, 이것들을 하나하나 자르면서 노드가 몇개인지 더해주기?
+    let cutNode = graph[idx];
+    
+    console.log('idx',idx)
+    console.log('cutNode',cutNode)
+    
+    
+    
+    return answer;
 }
