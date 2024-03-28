@@ -10,15 +10,13 @@ let arr = input.map((el) => {
 });
 
 // 길이가 1인 경우 같은 값으로 채우기
-for (let i = 0; i < N; i++) {
-    if (arr[i].length == 1) {
-        arr[i].push(arr[i][0]);
-    }
-}
+// for (let i = 0; i < N; i++) {
+//     if (arr[i].length == 1) {
+//         arr[i].push(arr[i][0]);
+//     }
+// }
 
 // 끝나는 시간에 대해서 오름차순 정렬
-// arr.sort((a, b) => a[1] - b[1]);
-
 // arr[1]이 같을 경우 arr[0] 기준으로 오름차순 정렬
 arr.sort((a, b) => {
     if (a[1] === b[1]) {
@@ -41,5 +39,4 @@ for (let i = 1; i < N; i++) {
     }
 }
 console.log(count);
-
 
