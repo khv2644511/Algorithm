@@ -13,10 +13,12 @@ let count = 0;
 for (let coin of coins) {
     if (coin > K) continue;
     if (coin <= K) {
-        while (Math.floor(K / coin) !== 0) {
-            // console.log(K / coin);
-            K -= coin;
-            count++;
+        let value = Math.floor(K / coin);
+        K -= value * coin;
+        count += value;
+
+        if (K === 0) {
+            break;
         }
     }
 }
