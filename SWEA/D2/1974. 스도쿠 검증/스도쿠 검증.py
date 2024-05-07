@@ -1,6 +1,5 @@
 T = int(input())
 
-
 for t in range(1, T+1):
     answer = 1
     arr = []
@@ -28,13 +27,8 @@ for t in range(1, T+1):
         for j in range(0, 9, 3):
             check3x3List = []   
             # 3x3 부분 배열 생성
-            # square = [board[x][y] for x in range(i, i + 3) for y in range(j, j + 3)]
-            for x in range(i, i+3):
-                for y in range(j, j+3):
-
-                    check3x3List.append(arr[x][y])
-                    # print(x, y)
-            if len(set(check3x3List)) !=9:
+            square = [arr[x][y] for x in range(i, i + 3) for y in range(j, j + 3)]
+            if len(set(square)) !=9:
                 answer = 0
                 break
 
