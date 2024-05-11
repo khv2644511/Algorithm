@@ -17,9 +17,9 @@ for t in range(1,T+1):
                 else:
                     speed -=b
 
-            distance += 1*speed
+            distance += speed
 
         else:
-            distance += 1*speed
+            distance += speed
 
     print(f'#{t} {distance}')
