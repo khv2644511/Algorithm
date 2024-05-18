@@ -1,34 +1,27 @@
 T = int(input())
 
-for i in range(1, T+1):
+for tc in range(1, T+1):
     N = int(input())
+    arr = [list(map(int, input().split())) for i in range(N)]
+    line = [[arr[j][i] for j in range(N)] for i in range(N)]
+    # print(line)
+    answer = []
 
-    # for j in range(N):
-    #     lst = list(map(int, input().split()))
-    #     arr.append(lst)
-    arr = [list(map(str, input().split())) for j in range(N)]
+    for i in range(N):
+        answer.append(line[i][::-1])
+        # print(line[i][::-1])
+    for i in range(N):
+        answer.append(arr[::-1][i][::-1])
+        # print(arr[::-1][i][::-1])
+    for i in range(N):
+        answer.append(line[::-1][i])
+        # print(line[::-1][i])
 
-    rotateArr = []
-    for a in range(0, N):
-        rotate90 =''
-        for b in range(0 ,N):
-            rotate90 += arr[N-1-b][a]
-        rotateArr.append(rotate90)
-
-        rotate180 = ''
-        for c in range(0 ,N):
-            rotate180 += arr[N-1-a][N-1-c]
-        rotateArr.append(rotate180)
-
-        rotate270 = ''
-        for c in range(0 ,N):
-            rotate270 += arr[c][N-1-a]
-        rotateArr.append(rotate270)
+    maxrix = [[0 for i in range(N)] for j in range(N)]
 
 
-    # print(rotateArr)
-    print(f'#{i}')
-    for k in range(len(rotateArr)):
-        print(rotateArr[k], end=' ')
-        if k %3==2:
-            print()
+    print(f'#{tc}')
+    for a in range(N):
+        for i in range(0, len(answer) , N):
+            print(''.join(map(str, answer[i+a])),end=' ')
+        print()
