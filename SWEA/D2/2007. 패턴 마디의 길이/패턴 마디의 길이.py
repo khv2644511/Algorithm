@@ -1,15 +1,15 @@
-n  = int(input())
+T = int(input())
 
-for i in range(1, n+1):
-    str = input()
-    firstStr = str[0]
+for tc in range(1, T+1):
+    string = input()
+    answer = 0
 
-    count = 0
-    for j in range(1, 30):
-        count +=1
-        if str[j] == firstStr:
-            if str[:count] != str[count: count*2]:
-                # print(str[count: count*2])
-                continue
-            print(f"#{i} {len(str[:count])}")
-            break
+    first_str = string[0]
+    for i in range(1, len(string)):
+        if string[i] == first_str:
+            if string[:i] == string[i:2*i]:
+                break
+
+    answer = len(string[:i])
+
+    print(f'#{tc} {answer}')
