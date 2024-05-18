@@ -14,8 +14,5 @@ for tc in range(1, T+1):
     print(f'#{tc}')
 
     for i in range(N):
-        answer = ' '.join(map(str, arr[i]))
-        for j in answer:
-            if j != '0':
-                print(j, end='')
-        print()
+        ans = [val for key, val in enumerate(arr[i]) if val != 0  ]
+        print(' '.join(map(str, ans)))
