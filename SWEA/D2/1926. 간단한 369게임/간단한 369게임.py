@@ -1,17 +1,13 @@
-n = int(input())
-l = 0
-m = 0
-k = 0
+N = int(input())
 
-for i in range(1,n+1):
-    
-    stringfyNum = str(i)
+# 30 36 39 339
+for i in range(1,N+1):
+    lst = list(str(i))
+    count = 0
 
-    l = stringfyNum.count('3')
-    m = stringfyNum.count('6')
-    k = stringfyNum.count('9')
+    count += lst.count('3') + lst.count('6') + lst.count('9')
 
-    if l+m+k > 0:
-        print('-'*(l+m+k), end=' ')
+    if count>= 1:
+        print('-'*count, end=' ')
     else:
-        print(stringfyNum, end=' ')
+        print(i , end=' ')
