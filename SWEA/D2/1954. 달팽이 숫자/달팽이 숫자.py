@@ -1,27 +1,19 @@
-T = int(input())
-di = [0, -1, 0, 1]
-dj = [1, 0, -1, 0]
-
-for t in range(1, T+1):
+x_move = [0,1,0,-1]
+y_move = [1,0,-1,0]
+for T in range(int(input())):
     N = int(input())
-    # arr = [[ 0 for x in range(N)] for y in range(N)]
-    arr = [[0]* N for _ in range(N)]
-    # print(arr)
+    arr = [[0]*N for _ in range(N)]
+    x,y,d= 0,0,0
+    for i in range(1, N*N + 1):
+        arr[x][y] = i
+        next_x, next_y = x + x_move[d], y + y_move[d]
 
-    i, j, cnt, dr = 0 , 0 , 1 , 0
-    arr[i][j] = cnt
-    cnt += 1
-
-    while(cnt <= N*N):
-        ni, nj = i + di[dr], j+dj[dr]
-        if 0<= ni < N and 0 <= nj < N and arr[ni][nj] == 0:
-            i, j = ni, nj
-            arr[i][j] = cnt
-            cnt += 1
+        if next_x<0 or next_x>=N or next_y<0 or next_y >=N or arr[next_x][next_y] !=0:
+            d =(d+1)%4
+            x,y = x+ x_move[d], y+y_move[d]
         else:
-            dr = (dr+1) % 4
+            x,y = next_x, next_y
 
-
-    print(f'#{t}')
-    for lst in arr:
-        print(*lst)
+    print(f'#{T+1}')
+    for i in arr:
+        print(' '.join(map(str, i)))
