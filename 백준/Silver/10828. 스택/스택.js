@@ -1,30 +1,57 @@
 const fs = require('fs');
-const input = fs.readFileSync("/dev/stdin").toString().trim().split('\n');
+let input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
+//const input = fs.readFileSync('./input.txt').toString().trim().split('\n');
 
-const n = input[0];
-input.shift();
+// console.log(input)
+let answer = [];
+let result = []
 
-let arr = [];
-let result = [];
+let N = input.shift();
+// console.log(N)
 
-input.forEach((el) => {
-    const [명령어, num] = el.trim().split(' ');
-    if (명령어 === 'push') {
-        arr.push(num);
-    } else if (명령어 === 'top') {
-        // arr.length !== 0 ? console.log(arr[arr.length - 1]) : console.log('-1');
-        arr.length !== 0 ? result.push(arr[arr.length - 1]) : result.push('-1');
-    } else if (명령어 === 'size') {
-        // console.log(arr.length);
-        result.push(arr.length);
-    } else if (명령어 === 'empty') {
-        // arr.length !== 0 ? console.log('0') : console.log('1');
-        arr.length !== 0 ? result.push('0') : result.push('1');
-    } else if (명령어 === 'pop') {
-        // arr.length === 0 ? console.log(-1) : console.log(arr.pop());
-        arr.length === 0 ? result.push(-1) : result.push(arr.pop());
-    }
+let arr = input.map((el) => {
+    return el.split(' ');
 });
 
-console.log(result.join('\n'));
+for (let el of arr) {
+    let todo = el[0]
+    if (todo === 'push') {
+        answer.push(el[1])
+    } else if (todo == 'pop') {
+        // pop: 스택에서 가장 위에 있는 정수를 빼고, 그 수를 출력한다. 만약 스택에 들어있는 정수가 없는 경우에는 -1을 출력한다.
+        if (answer.length) {
+            let pop_el = answer.pop()
+            result.push(pop_el)
+            // console.log(pop_el)
+        } else {
+            result.push(-1)
+            // console.log(-1)
+        }
+    } else if (todo=='size') {
+        // size: 스택에 들어있는 정수의 개수를 출력한다.
+        // console.log(answer.length)
+        result.push(answer.length)
+    } else if (todo =='empty') {
+        // empty: 스택이 비어있으면 1, 아니면 0을 출력한다.
+        if (answer.length) {
+            // console.log(0)
+            result.push(0)
+        } else {
+            // console.log(1)
+            result.push(1)
 
+        }
+    } else if (todo=='top') {
+        // top: 스택의 가장 위에 있는 정수를 출력한다. 만약 스택에 들어있는 정수가 없는 경우에는 -1을 출력한다.
+        if (answer.length) {
+            // console.log(answer[answer.length - 1])
+            result.push(answer[answer.length - 1])
+        } else {
+            // console.log(-1)
+            result.push(-1)
+        }
+
+    }
+}
+
+console.log(result.join('\n'));
