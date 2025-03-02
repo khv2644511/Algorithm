@@ -1,6 +1,6 @@
 # [level 2] 도넛과 막대 그래프 - 258711 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/258711?language=javascript) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/258711) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 03월 02일 16:35:47
+2025년 03월 02일 16:36:17
 
 ### 문제 설명
 
